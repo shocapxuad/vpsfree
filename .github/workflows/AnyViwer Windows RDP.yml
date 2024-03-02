@@ -1,0 +1,22 @@
+name: AnyViewer Windows RDP
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Downloading & Setting Up
+        run: |
+         echo "EMAIL_SECRET=Your Anyviewer Mail" > secrets.txt
+         echo "PASSWORD_SECRET=YOur AnyViewer Pass" >> secrets.txt
+         Invoke-WebRequest -Uri "https://www.dropbox.com/sh/l567nu2ff84q4dr/AACTILIbK9bi5yQLtp221pTJa/down.bat?dl=1" -OutFile "down.bat"
+         cmd /c down.bat
+          
+      - name: Login Details
+        run: cmd /c show.bat
+
+      - name: Time Counter
+        run: Start-Sleep -Seconds 14600
